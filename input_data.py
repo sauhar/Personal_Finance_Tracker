@@ -19,7 +19,7 @@ def get_amount():
     try:
         if amount <=0:
             print("Amount must be a non-negative and non-zero value.")
-            return amount
+        return amount
     except:
         print("Invalid amoun Type")
         return get_amount()
