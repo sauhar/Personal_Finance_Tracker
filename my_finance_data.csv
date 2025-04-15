@@ -1,3 +1,5 @@
 date,amount,category,description
 25-06-2025,256.25,income,salary
-15-04-25,25.0,Expense,food
+15-04-2025,25.0,Expense,food
+15-04-2025,15.0,Expense,food
+15-04-2025,650.0,Income,salary
