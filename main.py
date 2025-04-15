@@ -24,20 +24,31 @@ class CSV:
             'description': description
         }
         # with open will automatically close the file
-        with open(self.csv_file, 'a', newline='') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=self.COLUMNS)
+        with open(self.csv_file, "a", newline="") as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=self.COLUMNS)  ## DictWriter object is created to allow you to write dictionaries into a CSV file.
             writer.writerow(new_data)
         print('Entry added successfully')
 
+def get_transactions(self,start_date, end_date):
+    df = pd.read_csv(self.csv_file)
+    ## converting all the dates of date column into a datetime object so that we can filter them as per transaction
+    df["date"] = pd.to_datetime(df["date"],format=date_format)
+    start_date = datetime.strptime(start_date, date_format)
+    end_date = datetime.strptime(end_date, date_format)
+    
+    mask = (df["date"]>=start_date) & (df["date"]<=end_date)
+    filtered_df = df.loc(mask)
+
+
+
 
 def add():
-    csv_instance = CSV()
-    csv_instance.initialize_csv()
+    CSV().initialize_csv()
     date = get_date(
         "Enter the date of the transaction (dd-mm-yyyy) or enter for today's date: ", allow_default=True)
     amount = get_amount()
     category = get_category()
     description = get_description()
-    csv_instance.input_data(date, amount, category, description)
+    CSV().input_data(date, amount, category, description)  ## input_data is an instance method of the CSV class, not a static method so we need . so we need to give give it self agrument
 
 add()
